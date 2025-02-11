@@ -2,23 +2,41 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
+
+            bindTest();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void bindTest()
         {
-            count++;
+            KungligaRPG.Models.Character testC = new Models.Character();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            Binding characterBind = new Binding();
+            characterBind.Source = testC;
+            characterBind.Path = "name";
+            characterName.SetBinding(Label.TextProperty, characterBind);
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            Binding phyBind = new Binding();
+            phyBind.Source = testC.physique;
+            phyBind.Path = "attrName";
+            characterPhy.SetBinding(Label.TextProperty, phyBind);
+
+            Binding dexBind = new Binding();
+            dexBind.Source = testC.dexterity;
+            dexBind.Path = "attrName";
+            characterDex.SetBinding(Label.TextProperty, dexBind);
+
+            Binding menBind = new Binding();
+            menBind.Source = testC.mentality;
+            menBind.Path = "attrName";
+            characterMen.SetBinding(Label.TextProperty, menBind);
+
+            Binding chaBind = new Binding();
+            chaBind.Source = testC.charisma;
+            chaBind.Path = "attrName";
+            characterCha.SetBinding(Label.TextProperty, chaBind);
         }
     }
 
