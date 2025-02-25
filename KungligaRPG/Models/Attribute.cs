@@ -8,60 +8,84 @@ using System.Threading.Tasks;
 
 namespace KungligaRPG.Models
 {
-    abstract public class Attribute
+    public abstract class Attribute
     {
         public string attrName {  get; set; }
-        public int value { get; set; }
+        public abstract dynamic currValue { get; set; }
+        public dynamic topValue { get; set; }
 
-        public Attribute() { attrName = "";  value = 0; }
-        public Attribute(string attrName, int value) { this.attrName = attrName;  this.value = value; }
+        protected Attribute() { attrName = ""; currValue = ""; topValue = ""; }
+        public Attribute(string attrName) { this.attrName = attrName; currValue = ""; topValue = ""; }
+
+        public abstract (string, string?) GetTuple();
     }
 
+    //topValue represents a value cap, which you cannot go above
     public class PrimaryAttribute : Attribute
     {
-        private int capValue { get; set; }
+        public override dynamic currValue { get; set; } = new int();
+        public new dynamic topValue { get; set; } = new int();
 
-        public PrimaryAttribute() { capValue = 5; }
+        public PrimaryAttribute() { }
         
-        //value: what the character has. Capvalue: what the character can get to (default 5)
-        public PrimaryAttribute(string attrName, int value, int capValue)
-                                : base(attrName, value) { this.capValue = capValue; }
+        public PrimaryAttribute(string attrName, int currValue, int topValue)
+                                : base(attrName) { this.currValue = currValue;  this.topValue = topValue; }
 
-        private void validAdjustUnderCap(int adjust) 
-        { 
-            if (value + adjust > capValue)
-                throw new ArithmeticException(
-                    "Cannot increase primary attribute " + attrName + " over cap(" + capValue + ")." );
-        }
-
-        private void validSetUnderCap(int newValue)
+        public override (string, string) GetTuple()
         {
-            if (newValue > capValue)
-                throw new ArithmeticException(
-                    "Cannot set primary attribute " + attrName + " over cap(" + capValue + ").");
+            return (currValue.ToString(), topValue.ToString());
         }
     }
 
+    //topValue represents a max value your attr resets to, curr value could be above max.
+    //max value could also be increased.
     public class SecondaryAttribute : Attribute
     {
-        public int maxValue { get; set; }
+        public override dynamic currValue { get; set; } = new int();
+        public new dynamic topValue { get; set; } = new int();
 
-        public SecondaryAttribute() { maxValue = 0; }
+        public SecondaryAttribute() { currValue = 0; }
 
-        //For secondary attr, this should set our default value. Example; Energy starts at 2/2.
         public SecondaryAttribute(string attrName, int value, int maxValue)
-            : base(attrName, value) { this.maxValue = maxValue; }
+            : base(attrName) { this.currValue = value; this.topValue = maxValue; }
 
+        public override (string, string) GetTuple()
+        {
+            return (currValue.ToString(), topValue.ToString());
+        }
     }
 
+    //topValue represents an adjustment to the base attr.
     public class BaseAttribute : Attribute
     {
-        private int adjustVal;
+        public override dynamic currValue { get; set; } = new int();
+        public new dynamic topValue { get; set; } = new int();
 
-        public BaseAttribute() { adjustVal = 0; }
+        public BaseAttribute() { currValue = 0; }
 
-        //This is for attributes with a base value. Example; Defense starts at a 10.
         public BaseAttribute(string attrName, int value, int adjustVal)
-            : base(attrName, value) {this.adjustVal = adjustVal; }
+            : base(attrName) { this.currValue = value; this.topValue = adjustVal; }
+
+        public override (string, string) GetTuple()
+        {
+            return (currValue.ToString(), topValue.ToString());
+        }
+    }
+
+    //topValue is an unused value
+    public class TextAttribute : Attribute
+    {
+        public override dynamic currValue { get; set; } = new string("");
+        public new dynamic? topValue { get; set; } = null;
+
+        public TextAttribute() { currValue = "New Character"; }
+
+        public TextAttribute(string attrName, string value)
+            : base(attrName) { this.currValue = value; }
+
+        public override (string, string?) GetTuple()
+        {
+            return (currValue, topValue);
+        }
     }
 }
