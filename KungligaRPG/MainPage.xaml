@@ -12,26 +12,30 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout>
-        <Label
-            x:Name="characterName"
-            FontSize="12"
-            Text=""></Label>
-        <Label
-            x:Name="characterPhy"
-            FontSize="12"
-            Text=""></Label>
-        <Label
-            x:Name="characterDex"
-            FontSize="12"
-            Text=""></Label>
-        <Label
-            x:Name="characterMen"
-            FontSize="12"
-            Text=""></Label>
-        <Label
-            x:Name="characterCha"
-            FontSize="12"
-            Text=""></Label>
+        <Label  x:Name="name"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="physique"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="dexterity"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="mentality"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="charisma"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="health"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="energy"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
+        <Label  x:Name="actionPts"
+                Text=""
+                TextColor="{StaticResource LightFont}"/>
     </VerticalStackLayout>
 
 </ContentPage>
