@@ -16,8 +16,6 @@ namespace KungligaRPG.Models
 
         protected Attribute() { attrName = ""; currValue = ""; topValue = ""; }
         public Attribute(string attrName) { this.attrName = attrName; currValue = ""; topValue = ""; }
-
-        public abstract (string, string?) GetTuple();
     }
 
     //topValue represents a value cap, which you cannot go above
@@ -30,11 +28,6 @@ namespace KungligaRPG.Models
         
         public PrimaryAttribute(string attrName, int currValue, int topValue)
                                 : base(attrName) { this.currValue = currValue;  this.topValue = topValue; }
-
-        public override (string, string) GetTuple()
-        {
-            return (currValue.ToString(), topValue.ToString());
-        }
     }
 
     //topValue represents a max value your attr resets to, curr value could be above max.
@@ -48,11 +41,6 @@ namespace KungligaRPG.Models
 
         public SecondaryAttribute(string attrName, int value, int maxValue)
             : base(attrName) { this.currValue = value; this.topValue = maxValue; }
-
-        public override (string, string) GetTuple()
-        {
-            return (currValue.ToString(), topValue.ToString());
-        }
     }
 
     //topValue represents an adjustment to the base attr.
@@ -65,11 +53,6 @@ namespace KungligaRPG.Models
 
         public BaseAttribute(string attrName, int value, int adjustVal)
             : base(attrName) { this.currValue = value; this.topValue = adjustVal; }
-
-        public override (string, string) GetTuple()
-        {
-            return (currValue.ToString(), topValue.ToString());
-        }
     }
 
     //topValue is an unused value
@@ -82,10 +65,5 @@ namespace KungligaRPG.Models
 
         public TextAttribute(string attrName, string value)
             : base(attrName) { this.currValue = value; }
-
-        public override (string, string?) GetTuple()
-        {
-            return (currValue, topValue);
-        }
     }
 }
