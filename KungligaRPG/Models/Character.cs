@@ -26,5 +26,10 @@ namespace KungligaRPG.Models
             attributes.Add("actionPts", new SecondaryAttribute("actionPts", 2, 2));
         }
 
+        public interface IRetrieveData
+        {
+            public void RetrieveDataList(SortedList<string, Attribute> attributes);
+        }
+
     }
 }

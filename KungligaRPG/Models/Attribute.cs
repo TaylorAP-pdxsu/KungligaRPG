@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Sources;
 
 namespace KungligaRPG.Models
 {
@@ -16,6 +17,8 @@ namespace KungligaRPG.Models
 
         protected Attribute() { attrName = ""; currValue = ""; topValue = ""; }
         public Attribute(string attrName) { this.attrName = attrName; currValue = ""; topValue = ""; }
+
+        public abstract void setValue(dynamic value);
     }
 
     //topValue represents a value cap, which you cannot go above
@@ -28,6 +31,17 @@ namespace KungligaRPG.Models
         
         public PrimaryAttribute(string attrName, int currValue, int topValue)
                                 : base(attrName) { this.currValue = currValue;  this.topValue = topValue; }
+
+        public override void setValue(dynamic value)
+        {
+            int valToInt = int.Parse(value);
+            if (valToInt > topValue)
+            {
+                Console.WriteLine(attrName + " value is greater than the cap value of " + topValue);
+            }
+            
+            currValue = valToInt;
+        }
     }
 
     //topValue represents a max value your attr resets to, curr value could be above max.
@@ -65,5 +79,10 @@ namespace KungligaRPG.Models
 
         public TextAttribute(string attrName, string value)
             : base(attrName) { this.currValue = value; }
+
+        public override void setValue(dynamic value)
+        {
+            this.currValue = value;
+        }
     }
 }

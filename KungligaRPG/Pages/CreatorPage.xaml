@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KungligaRPG.Pages.CreatorPage">
+
+    <ContentPage.Resources>
+        <Color x:Key="SectionsColor">#E5EFC1</Color>
+            <Color x:Key="LightFont">#e9e9e9</Color>
+            <Color x:Key="BgIcon">#1d1d1d</Color>
+            <Color x:Key="BorderColor">#245F73</Color>
+            <Style x:Key="ElementStyle" TargetType="Border">
+                <Setter Property="WidthRequest" Value="75"/>
+                <Setter Property="HeightRequest" Value="75"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BgIcon}"/>
+                <Setter Property="Stroke" Value="{StaticResource BorderColor}"/>
+                <Setter Property="StrokeThickness" Value="3"/>
+            </Style>
+    </ContentPage.Resources>
+        
+    <FlexLayout Direction="Column" AlignItems="Start">
+        <HorizontalStackLayout>
+            <Label x:Name="PageTitle" Text="Character Creator"
+                   FontSize="18" Padding="5"/>
+
+            <Button Text="Create Character"
+                    Clicked="Button_Clicked"/>
+        </HorizontalStackLayout>
+
+        <Grid RowSpacing="2" ColumnSpacing="50">
+            <!-- Define the rows and columns of the grid -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Entry  Grid.Row="5" Grid.Column="0"
+                    Placeholder="Character Name"
+                    PlaceholderColor="DarkGray"/>
+
+            
+        </Grid>
+    </FlexLayout>
+</ContentPage>
