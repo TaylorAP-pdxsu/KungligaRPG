@@ -23,6 +23,10 @@ namespace KungligaRPG.UI
             FindAndSet("dexterity", attributes);
             FindAndSet("mentality", attributes);
             FindAndSet("charisma", attributes);
+            attributes["health"].setValue(
+                        Character.SetHealth((Enums.Dice)(int.Parse((string)(((Picker)page.FindByName("healthDie")).SelectedItem)))
+                                    , attributes["physique"].currValue)
+                        );
         }
 
         public void FindAndSet(string key, SortedList<string, Models.Attribute> attributes)

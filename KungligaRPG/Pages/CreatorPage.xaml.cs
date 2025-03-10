@@ -17,6 +17,6 @@ public partial class CreatorPage : ContentPage
 
 		creator.RetrieveDataList(character.attributes);
 
-		Navigation.PushAsync(new MainPage());
+		Navigation.PushAsync(new MainPage(character));
     }
 }

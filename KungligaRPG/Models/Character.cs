@@ -26,9 +26,20 @@ namespace KungligaRPG.Models
             attributes.Add("actionPts", new SecondaryAttribute("actionPts", 2, 2));
         }
 
+        public Character(Character source)
+        {
+            attributes = new SortedList<string, Attribute>(source.attributes);
+        }
+
         public interface IRetrieveData
         {
             public void RetrieveDataList(SortedList<string, Attribute> attributes);
+        }
+
+        public static int SetHealth(Enums.Dice dice, int phys)
+        {
+            Random random = new Random();
+            return random.Next(1, (int)dice) + phys;
         }
 
     }

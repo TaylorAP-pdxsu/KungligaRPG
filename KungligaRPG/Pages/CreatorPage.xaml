@@ -46,11 +46,42 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Entry  Grid.Row="5" Grid.Column="0"
+            <Entry  Grid.Row="2" Grid.Column="0"
+                    x:Name="name"
                     Placeholder="Character Name"
                     PlaceholderColor="DarkGray"/>
-
+            <Entry Grid.Row="3" Grid.Column="0"
+                   x:Name="physique"
+                   Placeholder="Physique Score"
+                   PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="4" Grid.Column="0"
+                   x:Name="dexterity"
+                   Placeholder="Dexterity Score"
+                   PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="5" Grid.Column="0"
+                   x:Name="mentality"
+                   Placeholder="Mentality Score"
+                   PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="6" Grid.Column="0"
+                   x:Name="charisma"
+                   Placeholder="Charisma Score"
+                   PlaceholderColor="DarkGray"/>
+            <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
+                <Label Text="die" FontSize="18" VerticalOptions="Center"/>
+                <Picker Grid.Row="8" Grid.Column="0"
+                        x:Name="healthDie">
+                    <Picker.Items>
+                        <x:String>4</x:String>
+                        <x:String>6</x:String>
+                        <x:String>8</x:String>
+                        <x:String>10</x:String>
+                        <x:String>12</x:String>
+                    </Picker.Items>
+                </Picker>
+            </HorizontalStackLayout>
             
+
+
         </Grid>
     </FlexLayout>
 </ContentPage>

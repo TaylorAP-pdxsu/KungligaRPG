@@ -1,5 +1,6 @@
 ﻿using KungligaRPG.UI;
 using KungligaRPG.Pages;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KungligaRPG
 {
@@ -8,11 +9,15 @@ namespace KungligaRPG
         public MainPage()
         {
             InitializeComponent();
+        }
 
-            KungligaRPG.Models.Character testC = new Models.Character();
+        public MainPage(Models.Character createdCharacter)
+        {
+            InitializeComponent();
 
+            Models.Character character = new Models.Character(createdCharacter);
             UICharacter uICharacter = new UICharacter();
-            uICharacter.CopyCharacterToStrings(testC);
+            uICharacter.CopyCharacterToStrings(character);
             uICharacter.BindToModel(this);
         }
 

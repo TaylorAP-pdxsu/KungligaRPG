@@ -12,8 +12,8 @@ namespace KungligaRPG.Models
     public abstract class Attribute
     {
         public string attrName {  get; set; }
-        public abstract dynamic currValue { get; set; }
-        public dynamic topValue { get; set; }
+        public abstract dynamic? currValue { get; set; }
+        public dynamic? topValue { get; set; }
 
         protected Attribute() { attrName = ""; currValue = ""; topValue = ""; }
         public Attribute(string attrName) { this.attrName = attrName; currValue = ""; topValue = ""; }
@@ -31,6 +31,11 @@ namespace KungligaRPG.Models
         
         public PrimaryAttribute(string attrName, int currValue, int topValue)
                                 : base(attrName) { this.currValue = currValue;  this.topValue = topValue; }
+        public PrimaryAttribute(PrimaryAttribute source) : base(source.attrName)
+        {
+            currValue = source.currValue;
+            topValue = source.topValue;
+        }
 
         public override void setValue(dynamic value)
         {
@@ -55,6 +60,17 @@ namespace KungligaRPG.Models
 
         public SecondaryAttribute(string attrName, int value, int maxValue)
             : base(attrName) { this.currValue = value; this.topValue = maxValue; }
+        public SecondaryAttribute(SecondaryAttribute source) : base(source.attrName)
+        {
+            currValue = source.currValue;
+            topValue = source.topValue;
+        }
+
+        public override void setValue(dynamic value)
+        {
+            //int valToInt = int.Parse((string)value);
+            currValue = topValue = value;
+        }
     }
 
     //topValue represents an adjustment to the base attr.
@@ -67,6 +83,16 @@ namespace KungligaRPG.Models
 
         public BaseAttribute(string attrName, int value, int adjustVal)
             : base(attrName) { this.currValue = value; this.topValue = adjustVal; }
+        public BaseAttribute(BaseAttribute source) : base(source.attrName)
+        {
+            currValue = source.currValue;
+            topValue = source.topValue;
+        }
+
+        public override void setValue(dynamic value)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     //topValue is an unused value
@@ -79,6 +105,10 @@ namespace KungligaRPG.Models
 
         public TextAttribute(string attrName, string value)
             : base(attrName) { this.currValue = value; }
+        public TextAttribute(TextAttribute source) : base(source.attrName)
+        {
+            currValue = source.currValue;
+        }
 
         public override void setValue(dynamic value)
         {
