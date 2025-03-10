@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KungligaRPG.Pages.CreatorPage">
+
+    <ContentPage.Resources>
+        <Color x:Key="SectionsColor">#E5EFC1</Color>
+            <Color x:Key="LightFont">#e9e9e9</Color>
+            <Color x:Key="BgIcon">#1d1d1d</Color>
+            <Color x:Key="BorderColor">#245F73</Color>
+            <Style x:Key="ElementStyle" TargetType="Border">
+                <Setter Property="WidthRequest" Value="75"/>
+                <Setter Property="HeightRequest" Value="75"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BgIcon}"/>
+                <Setter Property="Stroke" Value="{StaticResource BorderColor}"/>
+                <Setter Property="StrokeThickness" Value="3"/>
+            </Style>
+    </ContentPage.Resources>
+        
+    <FlexLayout Direction="Column" AlignItems="Start">
+        <HorizontalStackLayout>
+            <Label x:Name="PageTitle" Text="Character Creator"
+                   FontSize="18" Padding="5"/>
+
+            <Button Text="Create Character"
+                    Clicked="Button_Clicked"/>
+        </HorizontalStackLayout>
+
+        <Grid RowSpacing="2" ColumnSpacing="50">
+            <!-- Define the rows and columns of the grid -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Entry  Grid.Row="2" Grid.Column="0"
+                    x:Name="name"
+                    Placeholder="Character Name"
+                    PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="3" Grid.Column="0"
+                   x:Name="physique"
+                   Placeholder="Physique Score"
+                   PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="4" Grid.Column="0"
+                   x:Name="dexterity"
+                   Placeholder="Dexterity Score"
+                   PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="5" Grid.Column="0"
+                   x:Name="mentality"
+                   Placeholder="Mentality Score"
+                   PlaceholderColor="DarkGray"/>
+            <Entry Grid.Row="6" Grid.Column="0"
+                   x:Name="charisma"
+                   Placeholder="Charisma Score"
+                   PlaceholderColor="DarkGray"/>
+            <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
+                <Label Text="die" FontSize="18" VerticalOptions="Center"/>
+                <Picker Grid.Row="8" Grid.Column="0"
+                        x:Name="healthDie">
+                    <Picker.Items>
+                        <x:String>4</x:String>
+                        <x:String>6</x:String>
+                        <x:String>8</x:String>
+                        <x:String>10</x:String>
+                        <x:String>12</x:String>
+                    </Picker.Items>
+                </Picker>
+            </HorizontalStackLayout>
+            
+
+
+        </Grid>
+    </FlexLayout>
+</ContentPage>
