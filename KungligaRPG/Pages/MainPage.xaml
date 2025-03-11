@@ -26,10 +26,10 @@
         </Style>
     </ContentPage.Resources>
 
-    <HorizontalStackLayout>
+    <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
     <Border Stroke="{StaticResource BorderColor}"
         BackgroundColor="{StaticResource BgIcon}"
-        HorizontalOptions="CenterAndExpand"
+        WidthRequest="400"
         VerticalOptions="Fill">
         <HorizontalStackLayout>
             <FlexLayout Direction="Column" AlignItems="Start">
@@ -177,22 +177,26 @@
     </Border>
     <Border Stroke="{StaticResource BorderColor}"
             BackgroundColor="{StaticResource BgIcon}"
-            HorizontalOptions="CenterAndExpand"
+            WidthRequest="300"
             VerticalOptions="Fill">
             <VerticalStackLayout Style="{StaticResource abilityScores}" HorizontalOptions="Center">
-                <Label Text="Weapon" />
-                <Label x:Name="weaponName" Text=""/>
-                <Label x:Name="weaponAttribute" Text=""/>
-                <Label x:Name="weaponAttackBonus" Text=""/>
-                <Label x:Name="weaponDamage" Text=""/>
+                <Label Text="Weapon:" TextDecorations="Underline" FontSize="24"/>
+                <Label x:Name="weaponName" Text="" FontSize="18"/>
+                <Label x:Name="weaponAttribute" Text="" FontSize="18"/>
+                <Label x:Name="weaponAttackBonus" Text="" FontSize="18"/>
+                <Label x:Name="weaponDamage" Text="" FontSize="18"/>
             </VerticalStackLayout>
     </Border>
     <Border Stroke="{StaticResource BorderColor}"
-        BackgroundColor="{StaticResource BgIcon}"
-        HorizontalOptions="CenterAndExpand"
-        VerticalOptions="Fill">
-
-
-    </Border>
+            BackgroundColor="{StaticResource BgIcon}"
+            WidthRequest="300"
+            VerticalOptions="Fill">
+            <VerticalStackLayout Style="{StaticResource abilityScores}" HorizontalOptions="Center">
+                <Label Text="Armor:" TextDecorations="Underline" FontSize="24"/>
+                <Label x:Name="armorName" Text="" FontSize="18"/>
+                <Label x:Name="armorBonus" Text="" FontSize="18"/>
+                <Label x:Name="armorMaxDex" Text="" FontSize="18"/>
+            </VerticalStackLayout>
+        </Border>
     </HorizontalStackLayout>
 </ContentPage>

@@ -25,7 +25,8 @@ namespace KungligaRPG.UI
         public void CopyCharacterToStrings(Character inputModel)
         {
             attributes = new SortedList<string, Models.Attribute>(inputModel.attributes);
-            weapon = new Weapon(inputModel);
+            weapon = new Weapon(inputModel.weapon, this.attributes);
+            armor = new Armor(inputModel.armor);
         }
         //Bind to UI
         public void BindToModel(ContentPage page)
@@ -47,13 +48,24 @@ namespace KungligaRPG.UI
             }
             Binding weaponBinding = new Binding("weapon.name");
             ((Label)page.FindByName("weaponName")).SetBinding (Label.TextProperty, weaponBinding);
+
             weaponBinding = new Binding("weapon.attribute");
             ((Label)page.FindByName("weaponAttribute")).SetBinding (Label.TextProperty, weaponBinding);
-            weaponBinding = new Binding("weapon");
-            ((Label)page.FindByName("weaponAttackBonus.attackBonus")).SetBinding (Label.TextProperty, weaponBinding);
+
+            weaponBinding = new Binding("weapon.showAttack");
+            ((Label)page.FindByName("weaponAttackBonus")).SetBinding (Label.TextProperty, weaponBinding);
+
             weaponBinding = new Binding("weapon.showDamage");
             ((Label)page.FindByName("weaponDamage")).SetBinding (Label.TextProperty, weaponBinding);
 
+            Binding armorBinding = new Binding("armor.name");
+            ((Label)page.FindByName("armorName")).SetBinding (Label.TextProperty, armorBinding);
+
+            armorBinding = new Binding("armor.showBonus");
+            ((Label)page.FindByName("armorBonus")).SetBinding (Label.TextProperty, armorBinding);
+
+            armorBinding = new Binding("armor.showMaxDex");
+            ((Label)page.FindByName("armorMaxDex")).SetBinding (Label.TextProperty, armorBinding);
         }
     }
 }

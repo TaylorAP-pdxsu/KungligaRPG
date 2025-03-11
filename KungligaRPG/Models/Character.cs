@@ -17,8 +17,6 @@ namespace KungligaRPG.Models
 
         public Character()
         {
-            armor = new Armor();
-            weapon = new Weapon();
             attributes = new SortedList<string, Attribute>();
             attributes.Add("name", new TextAttribute("name", "New Character"));
             attributes.Add("physique", new PrimaryAttribute("physique", 0, 5));
@@ -29,6 +27,8 @@ namespace KungligaRPG.Models
             attributes.Add("energy", new SecondaryAttribute("energy", 4, 4));
             attributes.Add("actionPts", new SecondaryAttribute("actionPts", 2, 2));
             attributes.Add("defense", new BaseAttribute("defense", 10, 0));
+            armor = new Armor();
+            weapon = new Weapon();
         }
 
         public Character(Character source)
@@ -36,12 +36,15 @@ namespace KungligaRPG.Models
             attributes = new SortedList<string, Attribute>(source.attributes);
             armor = new Armor(source.armor);
             weapon = new Weapon(source.weapon);
-            attributes["defense"].setValue(armor.bonus);
+            attributes["defense"].setValue(SetArmor(
+                                                    armor
+                                                    , attributes["dexterity"].currValue
+                                                    ));
         }
 
         public interface IRetrieveData
         {
-            public void RetrieveDataList(SortedList<string, Attribute> attributes);
+            public void RetrieveDataList(Character character);
         }
 
         public static int SetHealth(Enums.Dice dice, int phys)

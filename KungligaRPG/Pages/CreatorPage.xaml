@@ -137,8 +137,8 @@
                     <Picker x:Name="weaponAttribute"
                             Title="Select Primary Attribute">
                         <Picker.Items>
-                            <x:String>Physique</x:String>
-                            <x:String>Dexterity</x:String>
+                            <x:String>physique</x:String>
+                            <x:String>dexterity</x:String>
                         </Picker.Items>
                     </Picker>
                     <Picker x:Name="weaponDie"

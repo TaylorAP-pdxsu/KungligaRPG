@@ -21,7 +21,7 @@ namespace KungligaRPG.Pages
 		{
 			Character character = new Character();
 
-			Creator.RetrieveDataList(character.attributes);
+			Creator.RetrieveDataList(character);
 
 			Navigation.PushAsync(new MainPage(character));
 		}

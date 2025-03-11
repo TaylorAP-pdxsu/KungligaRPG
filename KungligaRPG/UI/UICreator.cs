@@ -50,30 +50,32 @@ namespace KungligaRPG.UI
             this.page = page;
             armors = new ObservableCollection<Armor>()
             {
-                new Armor("test1", 1, 0),
-                new Armor("test2", 2, 0),
-                new Armor("test3", 3, 0)
+                new Armor("Leather", 1, 0),
+                new Armor("Chain", 2, 0),
+                new Armor("Plate", 3, 0)
             };
             weapons = new ObservableCollection<Weapon>()
             {
-                new Weapon("test1", "physique", "8"),
-                new Weapon("test2", "dexterity", "6"),
-                new Weapon("test3", "physique", "12")
+                new Weapon("Longsword", "physique", "8"),
+                new Weapon("Shortsword", "dexterity", "6"),
+                new Weapon("Greataxe", "physique", "12")
             };
         }
 
-        public void RetrieveDataList(SortedList<string, Models.Attribute> attributes)
+        public void RetrieveDataList(Character character)
         {
-            FindAndSet("name", attributes);
-            FindAndSet("physique", attributes);
-            FindAndSet("dexterity", attributes);
-            FindAndSet("mentality", attributes);
-            FindAndSet("charisma", attributes);
-            attributes["health"].setValue(
+            FindAndSet("name", character.attributes);
+            FindAndSet("physique", character.attributes);
+            FindAndSet("dexterity", character.attributes);
+            FindAndSet("mentality", character.attributes);
+            FindAndSet("charisma", character.attributes);
+            character.attributes["health"].setValue(
                         Character.SetHealth((Enums.Dice)(int.Parse((string)(((Picker)page.FindByName("healthDie")).SelectedItem)))
-                                    , attributes["physique"].currValue)
+                                    , character.attributes["physique"].currValue)
                         );
             //attributes["defense"].setValue(Character.SetArmor())
+            character.armor = new Armor(SelectedArmor);
+            character.weapon = new Weapon(SelectedWeapon);
         }
 
         public void FindAndSet(string key, SortedList<string, Models.Attribute> attributes)
