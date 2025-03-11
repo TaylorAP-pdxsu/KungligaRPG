@@ -26,6 +26,13 @@
         </Style>
     </ContentPage.Resources>
 
+    <VerticalStackLayout>
+    <Button VerticalOptions="Start"
+            HorizontalOptions="Start"
+            HeightRequest="30"
+            WidthRequest="150"
+            Text="Edit Character"
+            Clicked="Button_Clicked"/>
     <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
     <Border Stroke="{StaticResource BorderColor}"
         BackgroundColor="{StaticResource BgIcon}"
@@ -169,10 +176,7 @@
 
                 </Grid>
             </FlexLayout>
-            <Button VerticalOptions="Start"
-                    HeightRequest="30"
-                    Text="Edit Character"
-                    Clicked="Button_Clicked"/>
+            
         </HorizontalStackLayout>
     </Border>
     <Border Stroke="{StaticResource BorderColor}"
@@ -199,4 +203,5 @@
             </VerticalStackLayout>
         </Border>
     </HorizontalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>
