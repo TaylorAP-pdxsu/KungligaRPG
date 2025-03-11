@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KungligaRPG.Pages.CreatorPage">
+             x:Class="KungligaRPG.Pages.CreatorPage"
+             xmlns:viewmodel="clr-namespace:KungligaRPG.UI"
+             x:DataType="viewmodel:UICreator"
+             >
 
     <ContentPage.Resources>
         <Color x:Key="SectionsColor">#E5EFC1</Color>
@@ -16,72 +19,142 @@
                 <Setter Property="StrokeThickness" Value="3"/>
             </Style>
     </ContentPage.Resources>
-        
-    <FlexLayout Direction="Column" AlignItems="Start">
+
+    <VerticalStackLayout>
         <HorizontalStackLayout>
             <Label x:Name="PageTitle" Text="Character Creator"
-                   FontSize="18" Padding="5"/>
+               FontSize="18" Padding="5"/>
 
             <Button Text="Create Character"
-                    Clicked="Button_Clicked"/>
+                Clicked="Button_Clicked"/>
         </HorizontalStackLayout>
+        <FlexLayout Direction="Row">
+            <Border Stroke="{StaticResource BorderColor}"
+                    BackgroundColor="{StaticResource BgIcon}"
+                    WidthRequest="300"
+                    HeightRequest="400">
+                <Grid RowSpacing="2" ColumnSpacing="50">
+                    <!-- Define the rows and columns of the grid -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-        <Grid RowSpacing="2" ColumnSpacing="50">
-            <!-- Define the rows and columns of the grid -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+                    <Entry  Grid.Row="2" Grid.Column="0"
+                            x:Name="name"
+                            Placeholder="Character Name"
+                            PlaceholderColor="DarkGray"/>
+                    <Entry Grid.Row="3" Grid.Column="0"
+                           x:Name="physique"
+                           Placeholder="Physique Score"
+                           PlaceholderColor="DarkGray"/>
+                    <Entry Grid.Row="4" Grid.Column="0"
+                           x:Name="dexterity"
+                           Placeholder="Dexterity Score"
+                           PlaceholderColor="DarkGray"/>
+                    <Entry Grid.Row="5" Grid.Column="0"
+                           x:Name="mentality"
+                           Placeholder="Mentality Score"
+                           PlaceholderColor="DarkGray"/>
+                    <Entry Grid.Row="6" Grid.Column="0"
+                           x:Name="charisma"
+                           Placeholder="Charisma Score"
+                           PlaceholderColor="DarkGray"/>
+                    <VerticalStackLayout Grid.Row="2" Grid.Column="1">
+                        <Label Text="Health die" FontSize="18" VerticalOptions="Center"/>
+                        <Picker x:Name="healthDie">
+                            <Picker.Items>
+                                <x:String>4</x:String>
+                                <x:String>6</x:String>
+                                <x:String>8</x:String>
+                                <x:String>10</x:String>
+                                <x:String>12</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            <Border Stroke="{StaticResource BorderColor}"
+                    BackgroundColor="{StaticResource BgIcon}"
+                    WidthRequest="300"
+                    HeightRequest="400">
+                <VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Armor" FontSize="18" HorizontalOptions="Center"/>
+                        <Picker x:Name="armorPicker"
+                                ItemsSource="{Binding armors}"
+                                ItemDisplayBinding="{Binding name}"
+                                SelectedItem="{Binding SelectedArmor}"/>
+                    </VerticalStackLayout>
+                    <Label Text="{Binding SelectedArmor.showStats}" TextColor="Red"/>
+                    <VerticalStackLayout>
+                        <Label Text="Weapon" FontSize="18" HorizontalOptions="Center"/>
+                        <Picker x:Name="weaponPicker"
+                                ItemsSource="{Binding weapons}"
+                                ItemDisplayBinding="{Binding name}"
+                                SelectedItem="{Binding SelectedWeapon}"/>
+                    </VerticalStackLayout>
+                    <Label Text="{Binding SelectedWeapon.showStats}" TextColor="Red"/>
+                </VerticalStackLayout>
+            </Border>
+            <Border Stroke="{StaticResource BorderColor}"
+                    BackgroundColor="{StaticResource BgIcon}"
+                    WidthRequest="300"
+                    HeightRequest="400">
+                <VerticalStackLayout>
+                    <Entry
+                            x:Name="armorName"
+                            Placeholder="Armor name"
+                            PlaceholderColor="DarkGray"/>
+                    <Entry
+                           x:Name="armorBonus"
+                           Placeholder="Bonus"
+                           PlaceholderColor="DarkGray"/>
+                    <Entry
+                           x:Name="armorMaxDex"
+                           Placeholder="Max Dex"
+                           PlaceholderColor="DarkGray"/>
+                    <Button Text="Add Armor"
+                            Clicked="AddArmor"/>
 
-            <Entry  Grid.Row="2" Grid.Column="0"
-                    x:Name="name"
-                    Placeholder="Character Name"
-                    PlaceholderColor="DarkGray"/>
-            <Entry Grid.Row="3" Grid.Column="0"
-                   x:Name="physique"
-                   Placeholder="Physique Score"
-                   PlaceholderColor="DarkGray"/>
-            <Entry Grid.Row="4" Grid.Column="0"
-                   x:Name="dexterity"
-                   Placeholder="Dexterity Score"
-                   PlaceholderColor="DarkGray"/>
-            <Entry Grid.Row="5" Grid.Column="0"
-                   x:Name="mentality"
-                   Placeholder="Mentality Score"
-                   PlaceholderColor="DarkGray"/>
-            <Entry Grid.Row="6" Grid.Column="0"
-                   x:Name="charisma"
-                   Placeholder="Charisma Score"
-                   PlaceholderColor="DarkGray"/>
-            <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
-                <Label Text="die" FontSize="18" VerticalOptions="Center"/>
-                <Picker Grid.Row="8" Grid.Column="0"
-                        x:Name="healthDie">
-                    <Picker.Items>
-                        <x:String>4</x:String>
-                        <x:String>6</x:String>
-                        <x:String>8</x:String>
-                        <x:String>10</x:String>
-                        <x:String>12</x:String>
-                    </Picker.Items>
-                </Picker>
-            </HorizontalStackLayout>
-            
-
-
-        </Grid>
-    </FlexLayout>
+                    <Entry
+                            x:Name="weaponName"
+                            Placeholder="Weapon name"
+                            PlaceholderColor="DarkGray"/>
+                    <Picker x:Name="weaponAttribute"
+                            Title="Select Primary Attribute">
+                        <Picker.Items>
+                            <x:String>Physique</x:String>
+                            <x:String>Dexterity</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Picker x:Name="weaponDie"
+                            Title="Select Damage die">
+                        <Picker.Items>
+                            <x:String>4</x:String>
+                            <x:String>6</x:String>
+                            <x:String>8</x:String>
+                            <x:String>10</x:String>
+                            <x:String>12</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Button Text="Add Weapon"
+                            Clicked="AddWeapon"/>
+                </VerticalStackLayout>
+            </Border>
+        </FlexLayout>
+    </VerticalStackLayout>
 </ContentPage>

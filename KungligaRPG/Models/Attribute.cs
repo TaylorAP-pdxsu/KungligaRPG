@@ -24,8 +24,8 @@ namespace KungligaRPG.Models
     //topValue represents a value cap, which you cannot go above
     public class PrimaryAttribute : Attribute
     {
-        public override dynamic currValue { get; set; } = new int();
-        public new dynamic topValue { get; set; } = new int();
+        public override dynamic? currValue { get; set; } = new int();
+        public new dynamic? topValue { get; set; } = new int();
 
         public PrimaryAttribute() { }
         
@@ -43,6 +43,7 @@ namespace KungligaRPG.Models
             if (valToInt > topValue)
             {
                 Console.WriteLine(attrName + " value is greater than the cap value of " + topValue);
+                return;
             }
             
             currValue = valToInt;
@@ -53,7 +54,7 @@ namespace KungligaRPG.Models
     //max value could also be increased.
     public class SecondaryAttribute : Attribute
     {
-        public override dynamic currValue { get; set; } = new int();
+        public override dynamic? currValue { get; set; } = new int();
         public new dynamic topValue { get; set; } = new int();
 
         public SecondaryAttribute() { currValue = 0; }
@@ -68,7 +69,6 @@ namespace KungligaRPG.Models
 
         public override void setValue(dynamic value)
         {
-            //int valToInt = int.Parse((string)value);
             currValue = topValue = value;
         }
     }
@@ -76,7 +76,7 @@ namespace KungligaRPG.Models
     //topValue represents an adjustment to the base attr.
     public class BaseAttribute : Attribute
     {
-        public override dynamic currValue { get; set; } = new int();
+        public override dynamic? currValue { get; set; } = new int();
         public new dynamic topValue { get; set; } = new int();
 
         public BaseAttribute() { currValue = 0; }
@@ -91,14 +91,14 @@ namespace KungligaRPG.Models
 
         public override void setValue(dynamic value)
         {
-            throw new NotImplementedException();
+            currValue = int.Parse(value);
         }
     }
 
     //topValue is an unused value
     public class TextAttribute : Attribute
     {
-        public override dynamic currValue { get; set; } = new string("");
+        public override dynamic? currValue { get; set; } = new string("");
         public new dynamic? topValue { get; set; } = null;
 
         public TextAttribute() { currValue = "New Character"; }
