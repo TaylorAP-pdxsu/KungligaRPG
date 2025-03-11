@@ -1,22 +1,39 @@
 using KungligaRPG.Models;
 using KungligaRPG.UI;
+using System.Collections.ObjectModel;
 
-namespace KungligaRPG.Pages;
-
-public partial class CreatorPage : ContentPage
+namespace KungligaRPG.Pages
 {
-	public CreatorPage()
+
+	public partial class CreatorPage : ContentPage
 	{
-		InitializeComponent();
-	}
+		UICreator Creator;
 
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-		Character character = new Character();
-		UICreator creator = new UICreator(this);
+		public CreatorPage()
+		{
 
-		creator.RetrieveDataList(character.attributes);
+            InitializeComponent();
+			Creator = new UICreator(this);
+			this.BindingContext = Creator;
+		}
 
-		Navigation.PushAsync(new MainPage(character));
+		private void Button_Clicked(object sender, EventArgs e)
+		{
+			Character character = new Character();
+
+			Creator.RetrieveDataList(character.attributes);
+
+			Navigation.PushAsync(new MainPage(character));
+		}
+
+        private void AddArmor(object sender, EventArgs e)
+        {
+			Creator.addArmorToList();
+        }
+
+		private void AddWeapon(object sender, EventArgs e)
+		{
+			Creator.addWeaponToList();
+		}
     }
 }

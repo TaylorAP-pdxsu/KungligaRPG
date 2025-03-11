@@ -151,7 +151,17 @@
                         <Label  Grid.Column="2" x:Name="actionPtsTop" Text="" Style="{StaticResource abilityScores}"/>
                     </Grid>
                 </Border>
-            
+
+                <Label  Grid.Row="4" Grid.Column="1" Text="Defense" Style="{StaticResource abilityScores}"/>
+                <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource abilityScorebg}">
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label  Grid.Column="0" x:Name="defense" Text="" Style="{StaticResource abilityScores}"/>
+                    </Grid>
+                </Border>
+
             </Grid>
         </FlexLayout>
         <Button VerticalOptions="Start"
