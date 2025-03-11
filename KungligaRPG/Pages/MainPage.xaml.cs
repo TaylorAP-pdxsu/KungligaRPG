@@ -23,7 +23,7 @@ namespace KungligaRPG
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CreatorPage());
+            Navigation.PopAsync();
         }
     }
 
