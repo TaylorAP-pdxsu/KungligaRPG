@@ -14,6 +14,10 @@ namespace KungligaRPG.Models
         public Dice damageDice { get; set; }
         public string showStats { get; set; }
 
+        public int attackBonus { get; set; }
+        public int damageBonus { get; set; }
+        public string showDamage { get; set; }
+
         public Weapon() { name = ""; attribute = ""; damageDice = Dice.dFour; }
 
         public Weapon(string name, string attribute, string damageDice)
@@ -32,9 +36,25 @@ namespace KungligaRPG.Models
             setShowStats();
         }
 
+        public Weapon(Character self)
+        {
+            this.name = self.weapon.name;
+            this.attribute = self.weapon.attribute;
+            this.damageDice = self.weapon.damageDice;
+            setShowStats();
+            this.attackBonus = 2 + self.attributes[this.attribute.ToLower()].currValue;
+            this.damageBonus = self.attributes[this.attribute.ToLower()].currValue;
+            setDamage();
+        }
+
         private void setShowStats()
         {
             showStats = "Name: " + name + "\nAttribute: " + attribute + "\nDamage Die: d" + (int)damageDice;
+        }
+
+        private void setDamage()
+        {
+            showDamage = "Damage: d" + (int)damageDice + " + " + damageBonus;
         }
     }
 }

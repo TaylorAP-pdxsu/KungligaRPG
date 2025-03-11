@@ -10,6 +10,7 @@ namespace KungligaRPG.Models
     {
         public SortedList<string, KungligaRPG.Models.Attribute> attributes {  get; set; }
         public Armor armor { get; set; }
+        public Weapon weapon { get; set; }
         //Primary attributes set to 0 values
         //Secondary attributes set to 0 values
         //Base attributes set to 10 *** Not yet implmented in character
@@ -17,6 +18,7 @@ namespace KungligaRPG.Models
         public Character()
         {
             armor = new Armor();
+            weapon = new Weapon();
             attributes = new SortedList<string, Attribute>();
             attributes.Add("name", new TextAttribute("name", "New Character"));
             attributes.Add("physique", new PrimaryAttribute("physique", 0, 5));
@@ -27,13 +29,14 @@ namespace KungligaRPG.Models
             attributes.Add("energy", new SecondaryAttribute("energy", 4, 4));
             attributes.Add("actionPts", new SecondaryAttribute("actionPts", 2, 2));
             attributes.Add("defense", new BaseAttribute("defense", 10, 0));
-            
         }
 
         public Character(Character source)
         {
             attributes = new SortedList<string, Attribute>(source.attributes);
             armor = new Armor(source.armor);
+            weapon = new Weapon(source.weapon);
+            attributes["defense"].setValue(armor.bonus);
         }
 
         public interface IRetrieveData
