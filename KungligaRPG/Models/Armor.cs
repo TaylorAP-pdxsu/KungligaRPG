@@ -10,7 +10,11 @@ namespace KungligaRPG.Models
     {
         public string name { get; set; }
         public int bonus { get; set; }
+        public string showBonus {  get; set; }
+
         public int maxDex { get; set; }
+        public string showMaxDex {  get; set; }
+
         public string showStats { get; set; }
 
         public Armor() { name = "";  bonus = 0; maxDex = 0; }
@@ -29,11 +33,23 @@ namespace KungligaRPG.Models
             this.bonus = source.bonus;
             this.maxDex = source.maxDex;
             setShowStats();
+            setBonus();
+            setMaxDex();
         }
 
         private void setShowStats()
         {
             showStats = "Name: " + name + "\nBonus: " + bonus + "\nMax Dex: " + maxDex;
+        }
+
+        private void setBonus()
+        {
+            showBonus = "Bonus: " + bonus;
+        }
+
+        private void setMaxDex()
+        {
+            showMaxDex = "Max Dex: " + maxDex;
         }
     }
 }

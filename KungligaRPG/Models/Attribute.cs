@@ -91,7 +91,12 @@ namespace KungligaRPG.Models
 
         public override void setValue(dynamic value)
         {
-            currValue = int.Parse(value);
+            if(currValue != 10)
+            {
+                currValue -= topValue;
+            }
+            topValue = value;
+            currValue += topValue;
         }
     }
 
